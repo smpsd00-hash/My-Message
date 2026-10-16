@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 認識我的需要 - 「我訊息」練習小天地</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#F2F9FC',
+                            card: '#FFFFFF',
+                            border: '#CFE6F0',
+                            primary: '#327692',
+                            primaryDark: '#235970',
+                            accent: '#F6BB42',
+                            softBlue: '#E5F3F8',
+                            text: '#4A5568',
+                            purple: '#9B7EDE',
+                            pink: '#F28B9B',
+                            green: '#68C3A3'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 25px -5px rgba(50, 118, 146, 0.08), 0 8px 10px -6px rgba(50, 118, 146, 0.04)',
+                        'card-hover': '0 20px 25px -5px rgba(50, 118, 146, 0.15), 0 10px 10px -5px rgba(50, 118, 146, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #EBF6FA;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(255, 255, 255, 0.8) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(207, 230, 240, 0.6) 0px, transparent 50%);
+            color: #4A5568;
+            overflow-x: hidden;
+        }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .card-flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-float {
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        /* Pulse Glow */
+        @keyframes pulse-soft {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(50, 118, 146, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(50, 118, 146, 0); }
+        }
+        .btn-pulse {
+            animation: pulse-soft 2.5s infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2F9FC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #B8D8E6;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #327692;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-6 px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
+
+    <div class="max-w-6xl mx-auto w-full space-y-8">
+        
+        <!-- Top Reference Banner Section -->
+        <header class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            <!-- Left Main Banner (04 認識我的需要) -->
+            <div class="lg:col-span-8 bg-gradient-to-br from-[#F4FAFD] to-[#FFFFFF] border-2 border-brand-border rounded-3xl p-5 sm:p-7 shadow-soft flex flex-col sm:flex-row items-center gap-6 relative overflow-hidden">
+                <!-- Decorative background circle -->
+                <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-brand-softBlue rounded-full opacity-50 pointer-events-none"></div>
+
+                <!-- Left Illustration Box -->
+                <div class="w-full sm:w-56 h-52 sm:h-56 bg-white rounded-2xl p-4 shadow-sm border border-[#E6F2F7] flex flex-col justify-between relative shrink-0 overflow-hidden group">
+                    <!-- Badge 04 -->
+                    <div class="bg-brand-primary text-white font-bold text-sm px-3.5 py-1 rounded-full w-fit z-10 shadow-sm">
+                        04
+                    </div>
+                    
+                    <!-- Cute SVG Watercolor-style Illustration -->
+                    <div class="inset-0 absolute flex items-center justify-center p-2">
+                        <svg viewBox="0 0 220 200" class="w-full h-full animate-float">
+                            <defs>
+                                <radialGradient id="skyGrad" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#DDF0F8" />
+                                    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+                                </radialGradient>
+                                <linearGradient id="sweaterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#C8B6EE" />
+                                    <stop offset="100%" stop-color="#9E86D8" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Soft Cloud Backdrop -->
+                            <circle cx="110" cy="105" r="85" fill="url(#skyGrad)" />
+                            <!-- Cute Cloud Left -->
+                            <g transform="translate(15, 70)">
+                                <path d="M15,30 Q5,30 5,20 Q5,10 15,10 Q20,0 32,5 Q45,5 45,18 Q52,20 50,28 Q48,32 35,32 Z" fill="#FFFFFF" stroke="#B6D7E8" stroke-width="2"/>
+                                <circle cx="22" cy="18" r="1.5" fill="#5A7D8C"/>
+                                <circle cx="32" cy="18" r="1.5" fill="#5A7D8C"/>
+                                <path d="M25,21 Q27,23 29,21" stroke="#5A7D8C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            </g>
+                            <!-- Floating Hearts & Leaves -->
+                            <path d="M165,45 C165,40 158,38 155,43 C152,38 145,40 145,45 C145,52 155,56 155,59 C155,56 165,52 165,45 Z" fill="#F6A6B2" opacity="0.8"/>
+                            <path d="M55,40 C55,36 50,35 48,39 C46,35 41,36 41,40 C41,45 48,48 48,50 C48,48 55,45 55,40 Z" fill="#77B5D9" opacity="0.7"/>
+                            
+                            <!-- Friend on Right (Warm Support) -->
+                            <g transform="translate(105, 45)">
+                                <!-- Hair -->
+                                <path d="M15,35 C10,15 45,10 52,30 C60,25 68,35 62,48 C55,45 55,35 50,35 Z" fill="#784F37"/>
+                                <!-- Face -->
+                                <circle cx="33" cy="40" r="20" fill="#FFE3D3"/>
+                                <!-- Smile & Eyes -->
+                                <path d="M24,36 Q27,32 30,36" stroke="#5A3A28" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                <path d="M37,36 Q40,32 43,36" stroke="#5A3A28" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                <path d="M28,43 Q33,50 39,43 Z" fill="#E87A7A"/>
+                                <circle cx="22" cy="42" r="3.5" fill="#F9A8A8" opacity="0.6"/>
+                                <circle cx="44" cy="42" r="3.5" fill="#F9A8A8" opacity="0.6"/>
+                                <!-- Yellow Shirt -->
+                                <path d="M15,58 Q33,55 48,60 L54,90 L10,90 Z" fill="#FCD074"/>
+                            </g>
+
+                            <!-- Main Child (Feeling Safe & Calm) -->
+                            <g transform="translate(50, 55)">
+                                <!-- Long Brown Hair Back -->
+                                <path d="M10,45 Q0,80 15,105 L75,105 Q90,80 75,45 Z" fill="#6D452F"/>
+                                <!-- Face -->
+                                <circle cx="44" cy="42" r="24" fill="#FFE6D8"/>
+                                <!-- Bangs -->
+                                <path d="M20,38 Q25,15 45,18 Q65,15 68,38 Q55,28 45,35 Q32,26 20,38 Z" fill="#7D523A"/>
+                                <!-- Hair Clip -->
+                                <circle cx="24" cy="28" r="4" fill="#F28B9B"/>
+                                <!-- Calm Closed Eyes -->
+                                <path d="M31,42 Q35,46 39,42" stroke="#5A3A28" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                                <path d="M49,42 Q53,46 57,42" stroke="#5A3A28" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                                <!-- Rosy Cheeks -->
+                                <circle cx="29" cy="47" r="4" fill="#F9A8A8" opacity="0.6"/>
+                                <circle cx="59" cy="47" r="4" fill="#F9A8A8" opacity="0.6"/>
+                                <!-- Gentle Smile -->
+                                <path d="M40,50 Q44,54 48,50" stroke="#D16B6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                <!-- Purple Sweater -->
+                                <path d="M16,68 Q44,62 72,68 L80,115 L8,115 Z" fill="url(#sweaterGrad)"/>
+                                <!-- Hands on Heart (Self-soothing) -->
+                                <ellipse cx="44" cy="86" rx="10" ry="7" fill="#FFE6D8" stroke="#E5C1B0" stroke-width="1.5"/>
+                            </g>
+
+                            <!-- Foreground Foliage & Heart -->
+                            <path d="M40,165 Q110,185 180,165" stroke="#88C9A1" stroke-width="6" fill="none" stroke-linecap="round"/>
+                            <circle cx="110" cy="172" r="10" fill="#B39DDB"/>
+                        </svg>
+                    </div>
+
+                    <!-- Bottom Right Dot -->
+                    <div class="w-4 h-4 rounded-full bg-brand-primary self-end z-10"></div>
+                </div>
+
+                <!-- Right Text Content -->
+                <div class="flex-1 text-center sm:text-left z-10 space-y-3">
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-black text-brand-primary tracking-wide">
+                            認識我的需要
+                        </h1>
+                        <div class="w-14 h-1.5 bg-brand-accent rounded-full mt-1.5 mx-auto sm:mx-0"></div>
+                    </div>
+                    
+                    <h2 class="text-lg sm:text-xl font-bold text-brand-primary pt-1">
+                        我需要什麼，才能感到安心？
+                    </h2>
+                    
+                    <p class="text-brand-text text-sm sm:text-base leading-relaxed font-medium">
+                        難過時，我可能需要<span class="text-brand-primary font-bold underline decoration-brand-accent decoration-2 underline-offset-4">有人陪伴</span>；疲倦時，我可能需要<span class="text-brand-primary font-bold underline decoration-brand-accent decoration-2 underline-offset-4">休息</span>；遇到困難時，我可能需要<span class="text-brand-primary font-bold underline decoration-brand-accent decoration-2 underline-offset-4">協助</span>。<br class="hidden sm:inline">
+                        學會表達自己的需要，能幫助我更清楚地照顧自己。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Banner (練習表達 - 「我訊息」練習卡) -->
+            <div class="lg:col-span-4 bg-gradient-to-br from-[#F4FAFD] to-[#FFFFFF] border-2 border-brand-border rounded-3xl p-5 sm:p-6 shadow-soft flex items-center gap-4 sm:gap-5 relative overflow-hidden">
+                <!-- Left Speech Bubble Illustration -->
+                <div class="w-28 h-32 sm:w-32 sm:h-36 bg-white rounded-2xl p-3 shadow-sm border border-[#E6F2F7] flex items-center justify-center shrink-0 relative">
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#7FAAC0] absolute -top-3 left-3"></div>
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <circle cx="60" cy="60" r="50" fill="#EBF6FA" />
+                        <!-- Heart -->
+                        <path d="M95,35 C95,28 85,25 80,32 C75,25 65,28 65,35 C65,44 80,50 80,55 C80,50 95,44 95,35 Z" fill="#F48FB1"/>
+                        <!-- Blue Speech Bubble -->
+                        <ellipse cx="55" cy="58" rx="30" ry="23" fill="#81D4FA" stroke="#29B6F6" stroke-width="2"/>
+                        <path d="M35,75 L25,87 L45,79 Z" fill="#81D4FA" stroke="#29B6F6" stroke-width="2" stroke-linejoin="round"/>
+                        <!-- 3 Dots in Bubble -->
+                        <circle cx="43" cy="58" r="3.5" fill="#FFFFFF"/>
+                        <circle cx="55" cy="58" r="3.5" fill="#FFFFFF"/>
+                        <circle cx="67" cy="58" r="3.5" fill="#FFFFFF"/>
+                        <!-- Caring Hand underneath -->
+                        <path d="M35,98 Q58,105 82,92 Q88,88 83,84 Q75,86 62,88 L45,86" fill="#FFE0B2" stroke="#BC8F6F" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <div class="w-2 h-2 rounded-full bg-[#7FAAC0] absolute -bottom-3 right-3"></div>
+                </div>
+
+                <!-- Right Action Area -->
+                <div class="flex-1 flex flex-col justify-center space-y-2.5">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-black text-brand-primary">練習表達</h2>
+                        <div class="w-10 h-1 bg-[#B6D7E8] rounded-full mt-1"></div>
+                    </div>
+                    <div class="space-y-0.5">
+                        <p class="font-bold text-gray-700 text-base sm:text-lg">「我訊息」練習卡</p>
+                        <p class="text-xs sm:text-sm text-gray-500">練習表達自己的需要</p>
+                    </div>
+                    <div class="pt-1">
+                        <button onclick="scrollToPractice()" class="w-full bg-brand-primary hover:bg-brand-primaryDark text-white font-bold py-2.5 px-4 rounded-full shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 text-sm sm:text-base btn-pulse group">
+                            <span>看看怎麼說</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Magic Formula Bar (什麼是「我訊息」？) -->
+        <section class="bg-white border-2 border-brand-border rounded-3xl p-5 sm:p-6 shadow-soft">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-500 flex items-center justify-center text-2xl shrink-0 shadow-sm">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-black text-brand-primary">「我訊息」小魔法公式</h3>
+                        <p class="text-xs sm:text-sm text-gray-500">試著用這三個步驟，溫柔又清楚地告訴別人你的需要！</p>
+                    </div>
+                </div>
+
+                <!-- 3 Step Formula Pills -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 w-full md:w-auto">
+                    <div class="bg-[#FFF4E6] border border-[#FFD8A8] px-4 py-2.5 rounded-2xl flex items-center gap-2 shadow-sm">
+                        <span class="w-6 h-6 rounded-full bg-amber-400 text-white font-bold text-xs flex items-center justify-center">1</span>
+                        <span class="font-bold text-amber-900 text-sm sm:text-base">我覺得... <span class="text-xs font-normal text-amber-700">(感受)</span></span>
+                    </div>
+                    <i class="fa-solid fa-plus text-brand-primary text-sm"></i>
+                    <div class="bg-[#EBFBEE] border border-[#B2F2BB] px-4 py-2.5 rounded-2xl flex items-center gap-2 shadow-sm">
+                        <span class="w-6 h-6 rounded-full bg-emerald-500 text-white font-bold text-xs flex items-center justify-center">2</span>
+                        <span class="font-bold text-emerald-900 text-sm sm:text-base">因為... <span class="text-xs font-normal text-emerald-700">(發生什麼事)</span></span>
+                    </div>
+                    <i class="fa-solid fa-plus text-brand-primary text-sm"></i>
+                    <div class="bg-[#E7F5FF] border border-[#A5D8FF] px-4 py-2.5 rounded-2xl flex items-center gap-2 shadow-sm">
+                        <span class="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">3</span>
+                        <span class="font-bold text-sky-900 text-sm sm:text-base">我需要/希望... <span class="text-xs font-normal text-sky-700">(安心的方法)</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Interactive Section -->
+        <main id="practice-section" class="space-y-6 scroll-mt-6">
+            
+            <!-- Mode Switcher Tabs -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-brand-softBlue/70 p-2 rounded-2xl border border-brand-border">
+                <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                    <button id="tab-cards" onclick="switchMode('cards')" class="flex-1 sm:flex-initial px-6 py-3 rounded-xl font-black text-base transition-all flex items-center justify-center gap-2 bg-brand-primary text-white shadow-md">
+                        <i class="fa-solid fa-clone"></i>
+                        <span>1. 「我訊息」練習卡 (12張情境)</span>
+                    </button>
+                    <button id="tab-builder" onclick="switchMode('builder')" class="flex-1 sm:flex-initial px-6 py-3 rounded-xl font-black text-base transition-all flex items-center justify-center gap-2 bg-white text-brand-primary hover:bg-brand-softBlue">
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                        <span>2. 自己拼拼看 (造句魔法機)</span>
+                    </button>
+                </div>
+
+                <!-- Voice Settings & Progress Star Counter -->
+                <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto justify-center">
+                    <!-- Voice Selector Badge -->
+                    <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-brand-border shadow-sm text-xs sm:text-sm">
+                        <i class="fa-solid fa-headphones-simple text-brand-primary"></i>
+                        <label for="voice-select" class="font-bold text-gray-600 shrink-0">範讀聲音：</label>
+                        <select id="voice-select" onchange="changePreferredVoice(this.value)" class="bg-brand-softBlue/60 text-brand-primary font-bold rounded-lg px-2 py-1 outline-none cursor-pointer border border-brand-border max-w-[160px] truncate">
+                            <option value="auto">✨ 自動挑選最親切語音</option>
+                        </select>
+                    </div>
+
+                    <!-- Stars Counter -->
+                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-brand-border shadow-sm justify-center">
+                        <span class="text-sm font-bold text-gray-600">練習星星：</span>
+                        <div id="star-container" class="flex items-center gap-0.5 text-amber-400 text-sm">
+                            <!-- Injected by JS -->
+                        </div>
+                        <span id="star-count-text" class="text-xs font-bold bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">0 / 12</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODE 1: Practice Flip Cards Section -->
+            <div id="mode-cards-content" class="space-y-6">
+                
+                <!-- Category Filter Pills -->
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-sm font-bold text-brand-primary mr-1"><i class="fa-solid fa-filter mr-1"></i>選擇情境：</span>
+                        <button onclick="filterCards('all')" id="filter-all" class="filter-btn bg-brand-primary text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-sm transition-all">全部情境 (12)</button>
+                        <button onclick="filterCards('sad')" id="filter-sad" class="filter-btn bg-white text-gray-600 hover:bg-brand-softBlue px-4 py-1.5 rounded-full text-sm font-bold border border-brand-border transition-all">😢 難過與孤單 (3)</button>
+                        <button onclick="filterCards('tired')" id="filter-tired" class="filter-btn bg-white text-gray-600 hover:bg-brand-softBlue px-4 py-1.5 rounded-full text-sm font-bold border border-brand-border transition-all">🥱 疲倦與不舒服 (3)</button>
+                        <button onclick="filterCards('hard')" id="filter-hard" class="filter-btn bg-white text-gray-600 hover:bg-brand-softBlue px-4 py-1.5 rounded-full text-sm font-bold border border-brand-border transition-all">🧩 遇到困難與委屈 (3)</button>
+                        <button onclick="filterCards('more')" id="filter-more" class="filter-btn bg-white text-gray-600 hover:bg-brand-softBlue px-4 py-1.5 rounded-full text-sm font-bold border border-brand-border transition-all">⚡ 生氣與害怕 (3)</button>
+                    </div>
+                    <button onclick="flipAllCards()" class="text-xs sm:text-sm text-brand-primary hover:text-brand-primaryDark font-bold underline flex items-center gap-1">
+                        <i class="fa-solid fa-rotate"></i> 全部翻回正面
+                    </button>
+                </div>
+
+                <!-- Cards Grid -->
+                <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic Cards injected via JS -->
+                </div>
+            </div>
+
+            <!-- MODE 2: Interactive Sentence Builder ("我訊息" 造句魔法機) -->
+            <div id="mode-builder-content" class="hidden">
+                <div class="bg-white border-2 border-brand-border rounded-3xl p-6 sm:p-8 shadow-soft space-y-8">
+                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                        <span class="bg-brand-softBlue text-brand-primary text-xs font-black px-3 py-1 rounded-full">動動小手選一選</span>
+                        <h3 class="text-2xl font-black text-brand-primary">製作專屬你的「我訊息」練習卡</h3>
+                        <p class="text-sm text-gray-500">點選下面的小卡片，看看組裝起來可以怎麼說！你也可以自己打字修改喔。</p>
+                    </div>
+
+                    <!-- 3 Step Selector Columns -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Step 1: 感受 -->
+                        <div class="bg-[#FFF9F0] border-2 border-[#FFE3B3] rounded-2xl p-4 space-y-3">
+                            <div class="flex items-center gap-2 border-b border-[#FFE3B3] pb-2">
+                                <span class="w-7 h-7 rounded-full bg-amber-400 text-white font-black flex items-center justify-center text-sm">1</span>
+                                <h4 class="font-black text-amber-900">現在，我覺得...</h4>
+                            </div>
+                            <div id="builder-step1" class="grid grid-cols-2 gap-2">
+                                <!-- Injected by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Step 2: 原因/情境 -->
+                        <div class="bg-[#F2FBF4] border-2 border-[#C3EICO] border-emerald-200 rounded-2xl p-4 space-y-3">
+                            <div class="flex items-center gap-2 border-b border-emerald-200 pb-2">
+                                <span class="w-7 h-7 rounded-full bg-emerald-500 text-white font-black flex items-center justify-center text-sm">2</span>
+                                <h4 class="font-black text-emerald-900">因為...</h4>
+                            </div>
+                            <div id="builder-step2" class="grid grid-cols-1 gap-2">
+                                <!-- Injected by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Step 3: 我的需要 -->
+                        <div class="bg-[#F0F8FF] border-2 border-sky-200 rounded-2xl p-4 space-y-3">
+                            <div class="flex items-center gap-2 border-b border-sky-200 pb-2">
+                                <span class="w-7 h-7 rounded-full bg-sky-500 text-white font-black flex items-center justify-center text-sm">3</span>
+                                <h4 class="font-black text-sky-900">我需要...才能安心</h4>
+                            </div>
+                            <div id="builder-step3" class="grid grid-cols-2 gap-2">
+                                <!-- Injected by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generated Result Preview Card -->
+                    <div class="bg-gradient-to-r from-[#E6F4F9] via-[#F4FAFD] to-[#E6F4F9] border-2 border-brand-primary/30 rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-inner">
+                        <div class="flex flex-col md:flex-row items-center gap-6">
+                            <!-- Avatar Icon -->
+                            <div id="builder-preview-emoji" class="w-24 h-24 rounded-3xl bg-white shadow-md border-2 border-brand-border flex items-center justify-center text-5xl shrink-0">
+                                😢
+                            </div>
+
+                            <!-- Speech Bubble Output -->
+                            <div class="flex-1 space-y-3 text-center md:text-left w-full">
+                                <div class="inline-block bg-brand-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                                    ✨ 我的「我訊息」練習卡
+                                </div>
+                                <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-brand-border shadow-sm text-lg sm:text-xl font-bold leading-relaxed text-gray-700">
+                                    「現在我覺得 <span id="out-step1" class="text-amber-600 underline decoration-2 underline-offset-4">有點難過</span> ，因為 <span id="out-step2" class="text-emerald-600 underline decoration-2 underline-offset-4">我不小心把作品弄壞了</span> ，我需要 <span id="out-step3" class="text-sky-600 underline decoration-2 underline-offset-4">有人抱抱我、陪我一下</span> ，這樣我會覺得比較安心。」
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex flex-row md:flex-col gap-3 w-full md:w-auto justify-center shrink-0">
+                                <button onclick="speakCustomBuilder()" class="flex-1 md:w-44 bg-brand-accent hover:bg-amber-500 text-amber-950 font-black py-3 px-5 rounded-2xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-volume-high text-lg"></i>
+                                    <span>聽聽看怎麼說</span>
+                                </button>
+                                <button onclick="celebrateCustomPractice()" class="flex-1 md:w-44 bg-brand-primary hover:bg-brand-primaryDark text-white font-black py-3 px-5 rounded-2xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-microphone-lines text-lg"></i>
+                                    <span>我跟著唸了一次！</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Teacher & Parent Guidance Footer -->
+        <footer class="bg-white/80 border border-brand-border rounded-2xl p-4 sm:p-5 text-xs sm:text-sm text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="bg-brand-softBlue text-brand-primary font-bold px-3 py-1 rounded-lg shrink-0">💡 給大人與老師的小提醒</span>
+                <span>當孩子還在情緒中時，可以先陪伴孩子深呼吸，再透過練習卡引導孩子指認自己的「感覺」與「需要」。</span>
+            </div>
+            <div class="text-brand-primary font-bold shrink-0">
+                情緒教育・認識我的需要
+            </div>
+        </footer>
+    </div>
+
+    <!-- Praise Toast Modal (No alert!) -->
+    <div id="praise-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white border-4 border-brand-accent rounded-3xl max-w-md w-full p-6 sm:p-8 text-center space-y-4 shadow-2xl transform transition-all scale-95" id="praise-modal-box">
+            <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-4xl mx-auto shadow-inner">
+                🌟
+            </div>
+            <h3 id="praise-title" class="text-2xl font-black text-brand-primary">太棒了！你很會表達喔！</h3>
+            <p id="praise-desc" class="text-gray-600 text-base leading-relaxed">
+                當你清楚說出自己的需要，別人就更知道怎麼幫助你，你也在好好照顧自己喔！
+            </p>
+            <div class="pt-2">
+                <button onclick="closePraiseModal()" class="bg-brand-primary hover:bg-brand-primaryDark text-white font-black py-3 px-8 rounded-full shadow-md transition-all">
+                    繼續練習 👍
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Practice Cards Data (12 comprehensive kid scenarios)
+        const practiceCards = [
+            {
+                id: 1,
+                category: 'sad',
+                categoryTag: '難過時',
+                tagColor: 'bg-blue-100 text-blue-700',
+                borderColor: 'border-blue-200',
+                emoji: '😢',
+                title: '心裡覺得好難過',
+                situation: '當我心愛的東西壞掉了，或是難過得想哭的時候...',
+                needBadge: '需要有人陪伴 / 擁抱',
+                needIcon: 'fa-hands-holding-child',
+                iMessage: {
+                    feeling: '我覺得很難過、有點想哭',
+                    reason: '因為我最喜歡的作品不小心壞掉了',
+                    need: '我需要你陪我坐一下，或給我一個抱抱'
+                },
+                spokenText: '我覺得很難過，有點想哭。因為我最喜歡的作品不小心壞掉了，我需要你陪我坐一下，或給我一個抱抱。',
+                altSayings: [
+                    '「我現在有點難過，你可以先陪著我嗎？」',
+                    '「可以借我一張衛生紙，抱抱我嗎？」'
+                ],
+                practiced: false
+            },
+            {
+                id: 2,
+                category: 'tired',
+                categoryTag: '疲倦時',
+                tagColor: 'bg-purple-100 text-purple-700',
+                borderColor: 'border-purple-200',
+                emoji: '🥱',
+                title: '身體與腦袋累累的',
+                situation: '當我上了很久的課、玩了好久，覺得全身沒力氣時...',
+                needBadge: '需要休息一下',
+                needIcon: 'fa-bed',
+                iMessage: {
+                    feeling: '我覺得好累、沒有力氣了',
+                    reason: '因為今天已經走了好多路、做了好多事',
+                    need: '我需要先安靜休息十分鐘，喝口水再繼續'
+                },
+                spokenText: '我覺得好累、沒有力氣了。因為今天已經做了好多事，我需要先安靜休息十分鐘，喝口水再繼續。',
+                altSayings: [
+                    '「我現在電池沒電了，需要去安靜角落休息一下。」',
+                    '「等我休息一下下，我們再一起玩好嗎？」'
+                ],
+                practiced: false
+            },
+            {
+                id: 3,
+                category: 'hard',
+                categoryTag: '遇到困難時',
+                tagColor: 'bg-amber-100 text-amber-800',
+                borderColor: 'border-amber-200',
+                emoji: '🧩',
+                title: '遇到困難卡住了',
+                situation: '當題目好難看不懂、鞋帶一直綁不好，覺得很著急的時候...',
+                needBadge: '需要別人的協助',
+                needIcon: 'fa-hand-holding-heart',
+                iMessage: {
+                    feeling: '我覺得很著急、有點挫折',
+                    reason: '因為這個步驟我試了好幾次還是做不出來',
+                    need: '我需要你教我怎麼做，或是幫我一下下'
+                },
+                spokenText: '我覺得很著急，也有點挫折。因為這個步驟我試了好幾次還是做不出來，我需要你教我怎麼做，或是幫我一下下。',
+                altSayings: [
+                    '「這個地方我卡住了，請問你可以示範給我看嗎？」',
+                    '「我自己試過了還是打不開，可以請你幫我嗎？」'
+                ],
+                practiced: false
+            },
+            {
+                id: 4,
+                category: 'more',
+                categoryTag: '生氣時',
+                tagColor: 'bg-rose-100 text-rose-700',
+                borderColor: 'border-rose-200',
+                emoji: '😤',
+                title: '心裡火大快爆炸了',
+                situation: '當別人沒有問我就拿走我的玩具，讓我很不舒服時...',
+                needBadge: '需要被尊重 / 冷靜空間',
+                needIcon: 'fa-wind',
+                iMessage: {
+                    feeling: '我覺得很生氣、很不舒服',
+                    reason: '因為你沒有問過我，就把我的積木拿走了',
+                    need: '我希望你下次先問我，現在我需要深呼吸冷靜一下'
+                },
+                spokenText: '我覺得很生氣、很不舒服。因為你沒有問過我，就把我的積木拿走了。我希望你下次先問我，現在我需要深呼吸冷靜一下。',
+                altSayings: [
+                    '「請停下來，我不喜歡這樣，請把東西還給我。」',
+                    '「我現在很生氣，我需要先去旁邊深呼吸五次。」'
+                ],
+                practiced: false
+            },
+            {
+                id: 5,
+                category: 'more',
+                categoryTag: '害怕緊張時',
+                tagColor: 'bg-emerald-100 text-emerald-700',
+                borderColor: 'border-emerald-200',
+                emoji: '😨',
+                title: '覺得害怕不安心',
+                situation: '當聽到很大的聲音、到陌生的地方，或上台心跳好快時...',
+                needBadge: '需要安全感與鼓勵',
+                needIcon: 'fa-shield-heart',
+                iMessage: {
+                    feeling: '我覺得很緊張、有點害怕',
+                    reason: '因為這是我第一次自己上台說話',
+                    need: '我需要你牽著我的手，或是對我比個加油的手勢'
+                },
+                spokenText: '我覺得很緊張、有點害怕。因為這是我第一次自己上台說話，我需要你牽著我的手，或是對我比個加油的手勢。',
+                altSayings: [
+                    '「這裡暗暗的我有點怕，可以陪我一起去嗎？」',
+                    '「我好緊張喔，你可以跟我說一聲加油嗎？」'
+                ],
+                practiced: false
+            },
+            {
+                id: 6,
+                category: 'sad',
+                categoryTag: '覺得孤單時',
+                tagColor: 'bg-sky-100 text-sky-700',
+                borderColor: 'border-sky-200',
+                emoji: '🥺',
+                title: '想一起玩卻不敢說',
+                situation: '看到大家玩得好開心，自己一個人在旁邊覺得孤單的時候...',
+                needBadge: '需要被接納與邀請',
+                needIcon: 'fa-people-group',
+                iMessage: {
+                    feeling: '我覺得有點孤單，也很羨慕',
+                    reason: '因為看到你們玩的遊戲好像很有趣',
+                    need: '我想要加入你們，請問我可以跟你們一起玩嗎？'
+                },
+                spokenText: '我覺得有點孤單，也很羨慕。因為看到你們玩的遊戲好像很有趣，我想要加入你們，請問我可以跟你們一起玩嗎？',
+                altSayings: [
+                    '「你們在玩什麼呀？算我一個好不好？」',
+                    '「我也可以幫忙當小助手，跟你們一起玩嗎？」'
+                ],
+                practiced: false
+            },
+            {
+                id: 7,
+                category: 'hard',
+                categoryTag: '被誤會時',
+                tagColor: 'bg-amber-100 text-amber-800',
+                borderColor: 'border-amber-200',
+                emoji: '😣',
+                title: '被誤會覺得好委屈',
+                situation: '明明不是我做的，或是我是想幫忙卻被責怪的時候...',
+                needBadge: '需要被好好傾聽',
+                needIcon: 'fa-ear-listen',
+                iMessage: {
+                    feeling: '我覺得好委屈、心裡酸酸的',
+                    reason: '因為剛剛不是我故意弄倒的，我是想要幫忙撿起來',
+                    need: '我需要你先聽我把話說完，了解真正發生的事'
+                },
+                spokenText: '我覺得好委屈、心裡酸酸的。因為剛剛不是我故意弄倒的，我是想要幫忙撿起來。我需要你先聽我把話說完，了解真正發生的事。',
+                altSayings: [
+                    '「請等一下，我有話想解釋，可以聽我說嗎？」',
+                    '「不是那樣的，你可以聽我說說看剛剛怎麼了嗎？」'
+                ],
+                practiced: false
+            },
+            {
+                id: 8,
+                category: 'tired',
+                categoryTag: '太吵雜時',
+                tagColor: 'bg-purple-100 text-purple-700',
+                borderColor: 'border-purple-200',
+                emoji: '🙉',
+                title: '聲音太大覺得好煩躁',
+                situation: '當周圍大家都在大聲尖叫、吵鬧，讓我頭昏腦脹的時候...',
+                needBadge: '需要安靜的環境',
+                needIcon: 'fa-volume-xmark',
+                iMessage: {
+                    feeling: '我覺得耳朵好痛、心裡很煩躁',
+                    reason: '因為現在旁邊的聲音太大聲了',
+                    need: '我需要大家把聲音放輕一點，或是讓我去安靜的地方'
+                },
+                spokenText: '我覺得耳朵好痛，心裡很煩躁。因為現在旁邊的聲音太大聲了，我需要大家把聲音放輕一點，或是讓我去安靜的地方。',
+                altSayings: [
+                    '「聲音太大了，我的耳朵不舒服，請小聲一點好嗎？」',
+                    '「這裡太吵了，我需要先去旁邊安靜一下。」'
+                ],
+                practiced: false
+            },
+            {
+                id: 9,
+                category: 'hard',
+                categoryTag: '被催促時',
+                tagColor: 'bg-amber-100 text-amber-800',
+                borderColor: 'border-amber-200',
+                emoji: '💦',
+                title: '還沒準備好卻一直被催',
+                situation: '當大人或朋友一直喊「快一點！快一點！」，讓我手忙腳亂時...',
+                needBadge: '需要多一點時間準備',
+                needIcon: 'fa-hourglass-half',
+                iMessage: {
+                    feeling: '我覺得好慌張、手忙腳亂的',
+                    reason: '因為大家一直催我，我反而更容易出錯',
+                    need: '我需要你再給我三分鐘的時間，讓我好好把事情收尾'
+                },
+                spokenText: '我覺得好慌張、手忙腳亂的。因為大家一直催我，我反而更容易出錯。我需要你再給我三分鐘的時間，讓我好好把事情做完。',
+                altSayings: [
+                    '「我已經在加快了，請再等我一下下好嗎？」',
+                    '「一直催我我會緊張，請給我兩分鐘整理好。」'
+                ],
+                practiced: false
+            },
+            {
+                id: 10,
+                category: 'sad',
+                categoryTag: '想念家人時',
+                tagColor: 'bg-blue-100 text-blue-700',
+                borderColor: 'border-blue-200',
+                emoji: '🧸',
+                title: '想念爸爸媽媽的時候',
+                situation: '在學校或別人家，突然好想念家裡的人，覺得心裡空空的...',
+                needBadge: '需要溫暖的安慰與連結',
+                needIcon: 'fa-house-chimney-heart',
+                iMessage: {
+                    feeling: '我覺得有點想家、心裡空空的',
+                    reason: '因為我現在很想念爸爸媽媽',
+                    need: '我需要抱著我的小玩偶，或是聽老師跟我說放學的時間'
+                },
+                spokenText: '我覺得有點想家，心裡空空的。因為我現在很想念爸爸媽媽，我需要抱著我的小玩偶，或是請老師告訴我放學的時間。',
+                altSayings: [
+                    '「老師，我有點想媽媽，可以抱抱我嗎？」',
+                    '「我想知道還要多久才會放學回家呢？」'
+                ],
+                practiced: false
+            },
+            {
+                id: 11,
+                category: 'tired',
+                categoryTag: '身體不舒服時',
+                tagColor: 'bg-purple-100 text-purple-700',
+                borderColor: 'border-purple-200',
+                emoji: '🤒',
+                title: '肚子餓或身體不舒服',
+                situation: '當我肚子餓扁了、頭暈暈的，或是肚子痛痛說不出話時...',
+                needBadge: '需要照顧身體與吃點東西',
+                needIcon: 'fa-bowl-rice',
+                iMessage: {
+                    feeling: '我覺得身體怪怪的、很不舒服',
+                    reason: '因為我的肚子有點痛，而且全身軟軟的沒力氣',
+                    need: '我需要告訴老師或大人，請他們帶我去保健室或休息'
+                },
+                spokenText: '我覺得身體怪怪的，很不舒服。因為我的肚子有點痛，而且全身沒力氣，我需要請大人帶我去休息或檢查一下。',
+                altSayings: [
+                    '「我肚子好餓喔，請問什麼時候可以吃點心呢？」',
+                    '「我覺得頭暈暈的不舒服，可以幫我量體溫嗎？」'
+                ],
+                practiced: false
+            },
+            {
+                id: 12,
+                category: 'more',
+                categoryTag: '做錯事緊張時',
+                tagColor: 'bg-emerald-100 text-emerald-700',
+                borderColor: 'border-emerald-200',
+                emoji: '😳',
+                title: '不小心打翻東西好自責',
+                situation: '當我不小心把水打翻、弄亂東西，心裡很怕被罵的時候...',
+                needBadge: '需要溫和引導與一起整理',
+                needIcon: 'fa-broom',
+                iMessage: {
+                    feeling: '我覺得很緊張，也很抱歉',
+                    reason: '因為我不小心手滑，把桌上的水杯打翻了',
+                    need: '我需要你不要生氣，跟我一起拿抹布把它擦乾淨'
+                },
+                spokenText: '我覺得很緊張，也很抱歉。因為我不小心把桌上的水杯打翻了，我需要你不要生氣，跟我一起拿抹布把它擦乾淨。',
+                altSayings: [
+                    '「對不起，我不是故意的，請問抹布在哪裡？我可以擦乾淨。」',
+                    '「我不小心弄倒了，可以請你幫我一起收拾嗎？」'
+                ],
+                practiced: false
+            }
+        ];
+
+        // Sentence Builder Options (Expanded to match more feelings and needs)
+        const builderData = {
+            step1: [
+                { text: '有點難過', emoji: '😢' },
+                { text: '好累喔', emoji: '🥱' },
+                { text: '很著急', emoji: '😣' },
+                { text: '很生氣', emoji: '😤' },
+                { text: '有點害怕', emoji: '😨' },
+                { text: '很孤單', emoji: '🥺' },
+                { text: '好委屈', emoji: '😖' },
+                { text: '很慌張', emoji: '💦' }
+            ],
+            step2: [
+                '我不小心把作品弄壞了',
+                '今天已經努力了很久，沒力氣了',
+                '這個題目好難，我一直做不出來',
+                '玩具沒有經過我同意就被拿走了',
+                '外面的聲音好大，讓我嚇一跳',
+                '我找不到人跟我一起玩',
+                '剛剛不是我故意的，卻被誤會了',
+                '大家一直催我，讓我手忙腳亂'
+            ],
+            step3: [
+                '有人抱抱我、陪我一下',
+                '去安靜的地方休息十分鐘',
+                '大人或朋友教我怎麼做',
+                '先自己深呼吸冷靜一下',
+                '有人牽著我的手給我勇氣',
+                '大家邀請我一起加入遊戲',
+                '先聽我把話說完',
+                '再給我三分鐘的時間準備好'
+            ]
+        };
+
+        let currentFilter = 'all';
+        let selectedBuilder = {
+            step1Index: 0,
+            step2Index: 0,
+            step3Index: 0
+        };
+
+        // Enhanced Natural Speech Engine for Warm, Coherent Taiwan Mandarin
+        let availableVoices = [];
+        let preferredVoiceURI = 'auto';
+        let currentlySpeakingCardId = null;
+
+        function initNaturalVoices() {
+            if (!('speechSynthesis' in window)) return;
+
+            const loadVoices = () => {
+                const allVoices = window.speechSynthesis.getVoices();
+                if (!allVoices.length) return;
+
+                // Filter Chinese voices and rank them by naturalness & Taiwan accent friendliness
+                const zhVoices = allVoices.filter(v => 
+                    v.lang.includes('zh') || v.lang.includes('cmn') || v.name.includes('Chinese') || v.name.includes('Taiwan') || v.name.includes('國語')
+                );
+
+                // Score voices so neural/natural Taiwan voices always come first
+                zhVoices.sort((a, b) => scoreVoice(b) - scoreVoice(a));
+                availableVoices = zhVoices;
+
+                const selectEl = document.getElementById('voice-select');
+                if (selectEl && zhVoices.length > 0) {
+                    const currentVal = selectEl.value;
+                    selectEl.innerHTML = '<option value="auto">✨ 自動挑選最親切語音</option>';
+                    zhVoices.forEach(v => {
+                        const isNatural = v.name.includes('Natural') || v.name.includes('HsiaoChen') || v.name.includes('HsiaoYu') || v.name.includes('Meijia') || v.name.includes('Google');
+                        const label = `${isNatural ? '🌟 ' : ''}${v.name.replace(/Microsoft |Online \(Natural\) - |Google /g, '')} (${v.lang})`;
+                        const opt = document.createElement('option');
+                        opt.value = v.voiceURI;
+                        opt.textContent = label;
+                        selectEl.appendChild(opt);
+                    });
+                    if (currentVal) selectEl.value = currentVal;
+                }
+            };
+
+            loadVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = loadVoices;
+            }
+        }
+
+        function scoreVoice(voice) {
+            let score = 0;
+            const name = voice.name || '';
+            const lang = voice.lang || '';
+
+            // Strongly prefer Taiwan Mandarin (zh-TW)
+            if (lang === 'zh-TW' || lang === 'cmn-Hant-TW') score += 50;
+            else if (lang.includes('TW') || name.includes('Taiwan')) score += 45;
+            else if (lang.includes('HK') || lang.includes('CN') || lang.includes('zh')) score += 10;
+
+            // Strongly prefer Microsoft Edge Neural voices (HsiaoChen / HsiaoYu are super warm & natural)
+            if (name.includes('HsiaoChen')) score += 100;
+            if (name.includes('HsiaoYu')) score += 95;
+            if (name.includes('YunJhe')) score += 85;
+            if (name.includes('Natural') || name.includes('Online')) score += 70;
+
+            // Apple / macOS / iOS premium Taiwan voice (Meijia)
+            if (name.includes('Meijia') || name.includes('美佳')) score += 80;
+            if (name.includes('Premium') || name.includes('Enhanced')) score += 40;
+
+            // Chrome Google國語（臺灣）voice
+            if (name.includes('Google') && (name.includes('臺灣') || name.includes('台灣') || lang === 'zh-TW')) score += 75;
+
+            return score;
+        }
+
+        function changePreferredVoice(uri) {
+            preferredVoiceURI = uri;
+            // Play a short friendly greeting to preview the voice
+            speakText('你好！我們一起來練習說出自己的需要吧！');
+        }
+
+        function getBestVoice() {
+            if (!availableVoices.length) {
+                const all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+                availableVoices = all.filter(v => v.lang.includes('zh')).sort((a, b) => scoreVoice(b) - scoreVoice(a));
+            }
+            if (preferredVoiceURI !== 'auto') {
+                const found = availableVoices.find(v => v.voiceURI === preferredVoiceURI);
+                if (found) return found;
+            }
+            return availableVoices[0] || null;
+        }
+
+        // Smooth & coherent speech synthesis with natural clause pacing
+        function speakText(rawText, cardId = null) {
+            if (!('speechSynthesis' in window)) return;
+
+            window.speechSynthesis.cancel();
+            currentlySpeakingCardId = cardId;
+            updateSpeakingButtonState();
+
+            // Clean up symbols that cause unnatural robotic pauses (e.g., slash, quotes)
+            const cleanedText = rawText
+                .replace(/[「」『』]/g, '')
+                .replace(/\//g, '或是')
+                .replace(/、/g, '，')
+                .trim();
+
+            const chosenVoice = getBestVoice();
+            const utterance = new SpeechSynthesisUtterance(cleanedText);
+
+            if (chosenVoice) {
+                utterance.voice = chosenVoice;
+                utterance.lang = chosenVoice.lang;
+            } else {
+                utterance.lang = 'zh-TW';
+            }
+
+            // Natural prosody tuning: Neural voices sound best near 0.96 rate & 1.02 pitch;
+            // Standard synthesis voices sound warmer and less robotic at 0.94 rate & 1.05 pitch.
+            const isNeural = chosenVoice && (chosenVoice.name.includes('Natural') || chosenVoice.name.includes('Hsiao') || chosenVoice.name.includes('Google'));
+            utterance.rate = isNeural ? 0.96 : 0.93;
+            utterance.pitch = isNeural ? 1.02 : 1.05;
+            utterance.volume = 1.0;
+
+            utterance.onend = () => {
+                currentlySpeakingCardId = null;
+                updateSpeakingButtonState();
+            };
+            utterance.onerror = () => {
+                currentlySpeakingCardId = null;
+                updateSpeakingButtonState();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function updateSpeakingButtonState() {
+            document.querySelectorAll('.speak-card-btn').forEach(btn => {
+                const id = parseInt(btn.getAttribute('data-card-id'), 10);
+                if (currentlySpeakingCardId === id) {
+                    btn.innerHTML = '<i class="fa-solid fa-waveform fa-beat text-amber-600"></i><span>溫柔朗讀中...</span>';
+                    btn.classList.add('ring-2', 'ring-amber-400', 'bg-amber-200');
+                } else {
+                    btn.innerHTML = '<i class="fa-solid fa-volume-high text-amber-600"></i><span>聽親切範讀</span>';
+                    btn.classList.remove('ring-2', 'ring-amber-400', 'bg-amber-200');
+                }
+            });
+        }
+
+        function renderCards() {
+            const grid = document.getElementById('cards-grid');
+            grid.innerHTML = '';
+
+            const filtered = currentFilter === 'all' 
+                ? practiceCards 
+                : practiceCards.filter(c => c.category === currentFilter);
+
+            filtered.forEach(card => {
+                const numStr = card.id < 10 ? '0' + card.id : card.id;
+                const cardEl = document.createElement('div');
+                cardEl.className = 'perspective-1000 h-[415px] sm:h-[430px] select-none';
+                cardEl.innerHTML = `
+                    <div id="card-inner-${card.id}" class="w-full h-full relative transform-style-3d">
+                        
+                        <!-- FRONT OF CARD (Situation & Need Discovery) -->
+                        <div class="absolute inset-0 w-full h-full backface-hidden bg-white border-2 border-brand-border rounded-3xl p-6 shadow-soft hover:shadow-card-hover transition-shadow flex flex-col justify-between">
+                            <div>
+                                <!-- Top Bar -->
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="${card.tagColor} text-xs font-black px-3 py-1 rounded-full">
+                                        ${card.categoryTag}
+                                    </span>
+                                    <span class="text-xs font-bold ${card.practiced ? 'text-amber-500 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200' : 'text-gray-400'}">
+                                        ${card.practiced ? '<i class="fa-solid fa-star mr-1"></i>已練習' : '練習卡 #' + numStr}
+                                    </span>
+                                </div>
+
+                                <!-- Center Emoji & Title -->
+                                <div class="text-center space-y-3 my-2">
+                                    <div class="w-20 h-20 mx-auto bg-brand-softBlue/60 rounded-3xl flex items-center justify-center text-5xl shadow-inner">
+                                        ${card.emoji}
+                                    </div>
+                                    <h3 class="text-xl font-black text-brand-primary">${card.title}</h3>
+                                    <p class="text-sm text-gray-600 leading-relaxed px-2">
+                                        ${card.situation}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Need Prompt & Flip Button -->
+                            <div class="space-y-3 pt-3 border-t border-dashed border-gray-200">
+                                <div class="bg-[#F4FAFD] rounded-2xl p-3 flex items-center justify-center gap-2 text-brand-primary font-bold text-sm">
+                                    <i class="fa-solid ${card.needIcon} text-brand-accent text-base"></i>
+                                    <span>這時候，我${card.needBadge}</span>
+                                </div>
+
+                                <button onclick="flipCard(${card.id}, true)" class="w-full bg-brand-primary hover:bg-brand-primaryDark text-white font-bold py-3 px-5 rounded-full shadow-md transition-all flex items-center justify-center gap-2 group">
+                                    <span>看看怎麼說</span>
+                                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- BACK OF CARD ("I-Message" Practice & Audio) -->
+                        <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-gradient-to-b from-[#FFFFFF] to-[#F4FAFD] border-2 border-brand-primary rounded-3xl p-5 sm:p-6 shadow-card-hover flex flex-col justify-between">
+                            <div class="space-y-2.5">
+                                <!-- Top Header -->
+                                <div class="flex items-center justify-between border-b border-brand-border pb-2">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-2xl">${card.emoji}</span>
+                                        <span class="font-black text-brand-primary text-base">「我訊息」這樣說：</span>
+                                    </div>
+                                    <button onclick="flipCard(${card.id}, false)" class="text-gray-400 hover:text-brand-primary text-sm font-bold px-2 py-1 rounded-lg hover:bg-gray-100 transition-colors" title="翻回正面">
+                                        <i class="fa-solid fa-rotate-left mr-1"></i>返回
+                                    </button>
+                                </div>
+
+                                <!-- Structured 3-Part I-Message Box -->
+                                <div class="bg-white border-2 border-brand-border rounded-2xl p-3 space-y-1.5 shadow-sm text-sm">
+                                    <div class="flex items-start gap-2">
+                                        <span class="bg-amber-400 text-white text-xs font-bold px-2 py-0.5 rounded-md shrink-0 mt-0.5">感受</span>
+                                        <p class="font-bold text-gray-700">「${card.iMessage.feeling}，</p>
+                                    </div>
+                                    <div class="flex items-start gap-2">
+                                        <span class="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded-md shrink-0 mt-0.5">原因</span>
+                                        <p class="font-bold text-gray-700">${card.iMessage.reason}，</p>
+                                    </div>
+                                    <div class="flex items-start gap-2">
+                                        <span class="bg-sky-500 text-white text-xs font-bold px-2 py-0.5 rounded-md shrink-0 mt-0.5">需要</span>
+                                        <p class="font-black text-brand-primary">${card.iMessage.need}。」</p>
+                                    </div>
+                                </div>
+
+                                <!-- Shorter Alternative Sayings (Clickable to listen too!) -->
+                                <div class="space-y-1">
+                                    <p class="text-xs font-bold text-gray-400 flex items-center justify-between">
+                                        <span>💡 點擊下方短句也可以聽範讀喔：</span>
+                                    </p>
+                                    <div class="text-xs text-gray-600 bg-brand-softBlue/50 rounded-xl p-2 space-y-1 font-medium">
+                                        ${card.altSayings.map(s => `
+                                            <button onclick="speakText('${s.replace(/'/g, "\\'")}')" class="w-full text-left hover:text-brand-primary hover:bg-white/80 px-2 py-1 rounded-lg transition-colors flex items-center justify-between gap-1 group">
+                                                <span>${s}</span>
+                                                <i class="fa-solid fa-volume-low text-brand-primary opacity-60 group-hover:opacity-100 shrink-0"></i>
+                                            </button>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons: Listen & Mark Practiced -->
+                            <div class="grid grid-cols-2 gap-2.5 pt-2">
+                                <button data-card-id="${card.id}" onclick="speakCard(${card.id})" class="speak-card-btn bg-amber-100 hover:bg-amber-200 text-amber-900 font-black py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-sm shadow-sm">
+                                    <i class="fa-solid fa-volume-high text-amber-600"></i>
+                                    <span>聽親切範讀</span>
+                                </button>
+                                <button onclick="markCardPracticed(${card.id})" class="${card.practiced ? 'bg-emerald-500 text-white' : 'bg-brand-primary hover:bg-brand-primaryDark text-white'} font-black py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-sm shadow-sm">
+                                    <i class="fa-solid ${card.practiced ? 'fa-check' : 'fa-star'}"></i>
+                                    <span>${card.practiced ? '已完成練習' : '我會說了！'}</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+                grid.appendChild(cardEl);
+            });
+        }
+
+        function flipCard(id, toBack) {
+            const inner = document.getElementById(`card-inner-${id}`);
+            if (!inner) return;
+            if (toBack) {
+                inner.classList.add('card-flipped');
+            } else {
+                inner.classList.remove('card-flipped');
+            }
+        }
+
+        function flipAllCards() {
+            practiceCards.forEach(c => flipCard(c.id, false));
+        }
+
+        function filterCards(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = 'filter-btn bg-white text-gray-600 hover:bg-brand-softBlue px-4 py-1.5 rounded-full text-sm font-bold border border-brand-border transition-all';
+            });
+            const activeBtn = document.getElementById(`filter-${category}`);
+            if (activeBtn) {
+                activeBtn.className = 'filter-btn bg-brand-primary text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-sm transition-all';
+            }
+            renderCards();
+        }
+
+        function speakCard(id) {
+            const card = practiceCards.find(c => c.id === id);
+            if (!card) return;
+            const sentence = card.spokenText || `${card.iMessage.feeling}，${card.iMessage.reason}，${card.iMessage.need}。`;
+            speakText(sentence, id);
+        }
+
+        function markCardPracticed(id) {
+            const card = practiceCards.find(c => c.id === id);
+            if (!card) return;
+            if (!card.practiced) {
+                card.practiced = true;
+                updateStarsUI();
+                showPraiseModal(
+                    `太棒了！你學會了「${card.categoryTag}」的表達！`,
+                    `你剛剛練習了：「${card.iMessage.feeling}，${card.iMessage.need}。」勇敢說出需要，能讓你感到更安心喔！`
+                );
+            } else {
+                showPraiseModal(
+                    `你又複習了一次「${card.categoryTag}」練習卡！`,
+                    `越常練習，下次遇到同樣的情況時，你就越能輕鬆說出來喔！`
+                );
+            }
+            renderCards();
+            // Keep the card flipped on re-render so user doesn't lose state
+            setTimeout(() => flipCard(id, true), 20);
+        }
+
+        function updateStarsUI() {
+            const totalCards = practiceCards.length;
+            const practicedCount = practiceCards.filter(c => c.practiced).length;
+            const starContainer = document.getElementById('star-container');
+            const countText = document.getElementById('star-count-text');
+
+            let starsHtml = '';
+            for (let i = 1; i <= totalCards; i++) {
+                if (i <= practicedCount) {
+                    starsHtml += '<i class="fa-solid fa-star text-amber-400 scale-110 transition-transform"></i>';
+                } else {
+                    starsHtml += '<i class="fa-regular fa-star text-gray-300"></i>';
+                }
+            }
+            starContainer.innerHTML = starsHtml;
+            countText.textContent = `${practicedCount} / ${totalCards}`;
+        }
+
+        function renderBuilder() {
+            const s1Container = document.getElementById('builder-step1');
+            const s2Container = document.getElementById('builder-step2');
+            const s3Container = document.getElementById('builder-step3');
+
+            s1Container.innerHTML = builderData.step1.map((item, idx) => `
+                <button onclick="selectBuilderOption(1, ${idx})" class="p-2.5 rounded-xl text-left font-bold text-sm transition-all flex items-center gap-2 border-2 ${selectedBuilder.step1Index === idx ? 'bg-amber-400 text-white border-amber-500 shadow-sm scale-[1.02]' : 'bg-white text-gray-700 border-amber-100 hover:bg-amber-50'}">
+                    <span class="text-xl">${item.emoji}</span>
+                    <span>${item.text}</span>
+                </button>
+            `).join('');
+
+            s2Container.innerHTML = builderData.step2.map((text, idx) => `
+                <button onclick="selectBuilderOption(2, ${idx})" class="p-2.5 rounded-xl text-left font-bold text-xs sm:text-sm transition-all border-2 ${selectedBuilder.step2Index === idx ? 'bg-emerald-500 text-white border-emerald-600 shadow-sm scale-[1.01]' : 'bg-white text-gray-700 border-emerald-100 hover:bg-emerald-50'}">
+                    ${text}
+                </button>
+            `).join('');
+
+            s3Container.innerHTML = builderData.step3.map((text, idx) => `
+                <button onclick="selectBuilderOption(3, ${idx})" class="p-2.5 rounded-xl text-left font-bold text-xs sm:text-sm transition-all border-2 ${selectedBuilder.step3Index === idx ? 'bg-sky-500 text-white border-sky-600 shadow-sm scale-[1.02]' : 'bg-white text-gray-700 border-sky-100 hover:bg-sky-50'}">
+                    ${text}
+                </button>
+            `).join('');
+
+            // Update Output Preview
+            const chosen1 = builderData.step1[selectedBuilder.step1Index];
+            const chosen2 = builderData.step2[selectedBuilder.step2Index];
+            const chosen3 = builderData.step3[selectedBuilder.step3Index];
+
+            document.getElementById('builder-preview-emoji').textContent = chosen1.emoji;
+            document.getElementById('out-step1').textContent = chosen1.text;
+            document.getElementById('out-step2').textContent = chosen2;
+            document.getElementById('out-step3').textContent = chosen3;
+        }
+
+        function selectBuilderOption(step, index) {
+            if (step === 1) {
+                selectedBuilder.step1Index = index;
+                // Auto-match default sensible pair if user wants quick exploration, while allowing free mix
+                selectedBuilder.step2Index = index;
+                selectedBuilder.step3Index = index;
+            } else if (step === 2) {
+                selectedBuilder.step2Index = index;
+            } else if (step === 3) {
+                selectedBuilder.step3Index = index;
+            }
+            renderBuilder();
+        }
+
+        function speakCustomBuilder() {
+            const chosen1 = builderData.step1[selectedBuilder.step1Index].text;
+            const chosen2 = builderData.step2[selectedBuilder.step2Index];
+            const chosen3 = builderData.step3[selectedBuilder.step3Index];
+            const text = `現在我覺得${chosen1}。因為${chosen2}，所以我需要${chosen3}，這樣我會覺得比較安心。`;
+            speakText(text);
+        }
+
+        function celebrateCustomPractice() {
+            const chosen1 = builderData.step1[selectedBuilder.step1Index].text;
+            const chosen3 = builderData.step3[selectedBuilder.step3Index];
+            showPraiseModal(
+                '哇！你成功組合出自己的「我訊息」了！',
+                `當你覺得「${chosen1}」的時候，記得告訴身邊信任的人：「我需要${chosen3}」，這是照顧自己超棒的方法喔！`
+            );
+        }
+
+        // Tab Switching & Modal Controls
+        function switchMode(mode) {
+            const tabCards = document.getElementById('tab-cards');
+            const tabBuilder = document.getElementById('tab-builder');
+            const contentCards = document.getElementById('mode-cards-content');
+            const contentBuilder = document.getElementById('mode-builder-content');
+
+            if (mode === 'cards') {
+                tabCards.className = 'flex-1 sm:flex-initial px-6 py-3 rounded-xl font-black text-base transition-all flex items-center justify-center gap-2 bg-brand-primary text-white shadow-md';
+                tabBuilder.className = 'flex-1 sm:flex-initial px-6 py-3 rounded-xl font-black text-base transition-all flex items-center justify-center gap-2 bg-white text-brand-primary hover:bg-brand-softBlue';
+                contentCards.classList.remove('hidden');
+                contentBuilder.classList.add('hidden');
+            } else {
+                tabBuilder.className = 'flex-1 sm:flex-initial px-6 py-3 rounded-xl font-black text-base transition-all flex items-center justify-center gap-2 bg-brand-primary text-white shadow-md';
+                tabCards.className = 'flex-1 sm:flex-initial px-6 py-3 rounded-xl font-black text-base transition-all flex items-center justify-center gap-2 bg-white text-brand-primary hover:bg-brand-softBlue';
+                contentBuilder.classList.remove('hidden');
+                contentCards.classList.add('hidden');
+            }
+        }
+
+        function scrollToPractice() {
+            const el = document.getElementById('practice-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            // Flip first card gently to demonstrate how it works
+            setTimeout(() => {
+                flipCard(1, true);
+            }, 600);
+        }
+
+        function showPraiseModal(title, desc) {
+            document.getElementById('praise-title').textContent = title;
+            document.getElementById('praise-desc').textContent = desc;
+            const modal = document.getElementById('praise-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePraiseModal() {
+            const modal = document.getElementById('praise-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Initialize on window load
+        window.onload = function() {
+            initNaturalVoices();
+            renderCards();
+            renderBuilder();
+            updateStarsUI();
+        };
+    </script>
+</body>
+</html>
